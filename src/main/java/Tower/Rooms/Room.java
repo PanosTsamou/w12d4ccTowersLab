@@ -20,4 +20,20 @@ public abstract class Room {
     public int getNumberOfGuests() {
         return guests.size();
     }
+
+    public void addGuest(Guest guest) {
+        if (this.guests.size() < this.capacity){
+            this.guests.add(guest);
+        }
+
+    }
+
+    public ArrayList<String> getListOfNamesOfGuestsInRoom(){
+        ArrayList<String> guestNames = new ArrayList<>();
+        for (Guest guest:this.guests){
+            guestNames.add(guest.getName());
+        }
+        return guestNames;
+    }
+
 }
