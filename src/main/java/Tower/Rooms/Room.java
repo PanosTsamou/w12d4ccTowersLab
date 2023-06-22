@@ -36,4 +36,9 @@ public abstract class Room {
         return guestNames;
     }
 
+    public void removeGuest(Guest guest) {
+        if (this.guests.contains(guest)){
+            this.guests.remove(guest);
+        }
+    }
 }

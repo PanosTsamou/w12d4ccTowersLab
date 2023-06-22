@@ -4,15 +4,19 @@ import org.junit.Test;
 import Guest.Guest;
 import Tower.Rooms.Bedroom;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class BedroomTest {
 
     private Bedroom bedroom;
+    private Guest guest1;
 
     @Before
     public void before(){
-        bedroom = new Bedroom(RoomType.SINGLE.getCapacity(), 101);
+        bedroom = new Bedroom(RoomType.SINGLE, 101);
+        guest1 = new Guest("Panos");
     }
 
     @Test
@@ -28,5 +32,30 @@ public class BedroomTest {
     @Test
     public void bedroomHasRoomNumber() {
         assertEquals(101, bedroom.getRoomNumber());
+    }
+
+    @Test
+    public void bedroomCanAddGuest(){
+        bedroom.addGuest(guest1);
+        assertEquals(1, bedroom.getNumberOfGuests());
+    }
+    @Test
+    public void bedroomHasListOfGuestNames(){
+        bedroom.addGuest(guest1);
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add(guest1.getName());
+        assertEquals(expected, bedroom.getListOfNamesOfGuestsInRoom());
+    }
+
+    @Test
+    public void bedroomCanRemoveGuest(){
+        bedroom.addGuest(guest1);
+        bedroom.removeGuest(guest1);
+        assertEquals(0, bedroom.getNumberOfGuests());
+    }
+
+    @Test
+    public void bedroomHasNightlyRate(){
+        assertEquals(50.00, bedroom.getNightlyRate(), 0.0);
     }
 }
