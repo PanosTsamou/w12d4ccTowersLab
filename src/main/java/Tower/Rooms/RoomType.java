@@ -1,24 +1,19 @@
 package Tower.Rooms;
 
 public enum RoomType {
-    SINGLE(1, 50.00),
-    DOUBLE(2, 80.00);
+    SINGLE(1),
+    DOUBLE(2);
 
 
     private int capacity;
-    private double nightlyRate;
 
-    RoomType(int capacity, double nightlyRate){
+    RoomType(int capacity){
 
         this.capacity = capacity;
-        this.nightlyRate = nightlyRate;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public double getNightlyRate() {
-        return nightlyRate;
-    }
 }

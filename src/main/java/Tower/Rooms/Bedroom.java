@@ -1,23 +1,33 @@
 package Tower.Rooms;
 
-import java.util.ArrayList;
-
 public class Bedroom extends Room{
 
-    private int roomNumber;
+    private String roomNumber;
     private RoomType roomType;
+    private  double nightlyRate;
 
-    public Bedroom(RoomType roomType, int roomNumber){
-        super(roomType.getCapacity());
+    public Bedroom(RoomType roomType, String roomNumber, double nightlyRate){
+        super();
         this.roomNumber = roomNumber;
         this.roomType = roomType;
+        this.nightlyRate = nightlyRate;
     }
 
-    public int getRoomNumber() {
+
+
+    public double getNightlyRate() {
+        return this.nightlyRate;
+    }
+
+    @Override
+    public int getCapacity() {
+        return roomType.getCapacity();
+    }
+
+    @Override
+    public String getName() {
         return roomNumber;
     }
 
-    public double getNightlyRate() {
-        return this.roomType.getNightlyRate();
-    }
+
 }

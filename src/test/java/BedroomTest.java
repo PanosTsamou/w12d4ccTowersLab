@@ -1,3 +1,4 @@
+import Tower.Rooms.Room;
 import Tower.Rooms.RoomType;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class BedroomTest {
 
     @Before
     public void before(){
-        bedroom = new Bedroom(RoomType.SINGLE, 101);
+        bedroom = new Bedroom(RoomType.SINGLE, "101", 50.00);
         guest1 = new Guest("Panos");
     }
 
@@ -31,7 +32,7 @@ public class BedroomTest {
 
     @Test
     public void bedroomHasRoomNumber() {
-        assertEquals(101, bedroom.getRoomNumber());
+        assertEquals("101", bedroom.getName());
     }
 
     @Test
@@ -57,5 +58,10 @@ public class BedroomTest {
     @Test
     public void bedroomHasNightlyRate(){
         assertEquals(50.00, bedroom.getNightlyRate(), 0.0);
+    }
+
+    @Test
+    public void calculateBedroomSize(){
+        assertEquals(22.00, Room.calculateRoomSize(4,5.5),.0);
     }
 }

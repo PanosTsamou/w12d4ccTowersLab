@@ -19,8 +19,8 @@ public class BookingTest {
 
     @Before
     public void before(){
-        bedroom101 = new Bedroom(RoomType.SINGLE, 101);
-        bedroom102 = new Bedroom(RoomType.DOUBLE, 102);
+        bedroom101 = new Bedroom(RoomType.SINGLE, "101", 50.00);
+        bedroom102 = new Bedroom(RoomType.DOUBLE, "102", 80.00);
         booking = new Booking(bedroom101, 3);
     }
 

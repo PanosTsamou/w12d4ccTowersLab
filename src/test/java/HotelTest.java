@@ -2,6 +2,7 @@ import Tower.Booking;
 import Tower.Hotel;
 import Tower.Rooms.Bedroom;
 import Tower.Rooms.ConferenceRoom;
+import Tower.Rooms.DiningRoom;
 import Tower.Rooms.RoomType;
 import Guest.Guest;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,28 +26,39 @@ public class HotelTest {
     private Bedroom bedroom105;
     private ConferenceRoom diamondCRoom;
     private ConferenceRoom sirBeckhamCRoom;
+
+    private DiningRoom pork;
+    private DiningRoom shellFish;
+    private DiningRoom beef;
     private Guest guest1;
     private Guest guest2;
     private Guest guest3;
 
     @Before
     public void before(){
-        bedroom101 = new Bedroom(RoomType.SINGLE, 101);
-        bedroom102 = new Bedroom(RoomType.DOUBLE, 102);
-        bedroom103 = new Bedroom(RoomType.SINGLE, 103);
-        bedroom104 = new Bedroom(RoomType.SINGLE, 104);
-        bedroom105 = new Bedroom(RoomType.SINGLE, 105);
+        bedroom101 = new Bedroom(RoomType.SINGLE, "101", 50.00);
+        bedroom102 = new Bedroom(RoomType.DOUBLE, "102", 80.00);
+        bedroom103 = new Bedroom(RoomType.SINGLE, "103", 50.00);
+        bedroom104 = new Bedroom(RoomType.SINGLE, "104", 70.00);
+        bedroom105 = new Bedroom(RoomType.SINGLE, "105", 50.00);
         diamondCRoom = new ConferenceRoom(12, "Diamond Room");
         sirBeckhamCRoom = new ConferenceRoom(20, "Sir Beckham");
+        pork = new DiningRoom("Pork", 8);
+        shellFish = new DiningRoom("Shellfish", 5);
+        beef = new DiningRoom("Beef", 10);
         ArrayList<Bedroom> allBedrooms = new ArrayList<>();
         ArrayList<ConferenceRoom> allConferenceRooms = new ArrayList<>();
+        HashMap<String, DiningRoom> allDiningRooms = new HashMap<>();
         allBedrooms.add(bedroom101);
         allBedrooms.add(bedroom102);
         allBedrooms.add(bedroom103);
         allBedrooms.add(bedroom104);
         allConferenceRooms.add(diamondCRoom);
         allConferenceRooms.add(sirBeckhamCRoom);
-        codeClanTower = new Hotel(allBedrooms, allConferenceRooms);
+        allDiningRooms.put(pork.getName(), pork);
+        allDiningRooms.put(shellFish.getName(),shellFish);
+        allDiningRooms.put(beef.getName(), beef);
+        codeClanTower = new Hotel(allBedrooms, allConferenceRooms, allDiningRooms);
         guest1 = new Guest("Panos");
         guest2 = new Guest("Alex");
         guest3 = new Guest("Sobia");
@@ -100,6 +113,21 @@ public class HotelTest {
         Booking actual = codeClanTower.bookRoom(bedroom101, 7);
         assertEquals(expected.getBedroom(), actual.getBedroom());
         assertEquals(expected.getNumberOfDays(), actual.getNumberOfDays());
+    }
+    @Test
+    public void hotelHasDiningRoom(){
+        assertEquals(3, codeClanTower.getNumberOfDiningRooms());
+    }
+
+    @Test
+    public void emptyBedroomsInHotel(){
+        codeClanTower.checkInGuestToRoom(bedroom101, guest1);
+        codeClanTower.checkInGuestToRoom(bedroom102, guest2);
+        codeClanTower.checkInGuestToRoom(bedroom102, guest3);
+        ArrayList<Bedroom> expected = new ArrayList<>();
+        expected.add(bedroom103);
+        expected.add(bedroom104);
+        assertEquals(expected, codeClanTower.getEmptyRoom());
     }
 
 }

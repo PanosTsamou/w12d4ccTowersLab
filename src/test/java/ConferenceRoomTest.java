@@ -1,4 +1,5 @@
 import Tower.Rooms.ConferenceRoom;
+import Tower.Rooms.Room;
 import Tower.Rooms.RoomType;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,5 +50,9 @@ public class ConferenceRoomTest {
         conferenceRoom.addGuest(guest1);
         conferenceRoom.removeGuest(guest1);
         assertEquals(0, conferenceRoom.getNumberOfGuests());
+    }
+    @Test
+    public void calculateConferenceRoomSize(){
+        assertEquals(84.00, Room.calculateRoomSize(8,10.5),.0);
     }
 }

@@ -5,24 +5,20 @@ import java.util.ArrayList;
 
 public abstract class Room {
 
-    private int capacity;
     private ArrayList<Guest> guests;
 
-    public Room(int capacity){
-        this.capacity = capacity;
+    public Room(){
         this.guests = new ArrayList<>();
     }
 
-    public int getCapacity(){
-        return this.capacity;
-    }
+    public abstract int getCapacity();
 
     public int getNumberOfGuests() {
         return guests.size();
     }
 
     public void addGuest(Guest guest) {
-        if (this.guests.size() < this.capacity){
+        if (this.guests.size() < getCapacity()){
             this.guests.add(guest);
         }
 
@@ -40,5 +36,17 @@ public abstract class Room {
         if (this.guests.contains(guest)){
             this.guests.remove(guest);
         }
+    }
+
+    public  abstract String getName();
+
+    public static double calculateRoomSize(double length, double width){
+        return length * width;
+    }
+    public boolean occupied() {
+        if (getNumberOfGuests() > 0){
+            return true;
+        }
+        return false;
     }
 }
